@@ -20,3 +20,32 @@ mb.on('databaseerror', function(ev) {
 });
 
 
+function onMarkerClick(){
+    this.openPopup();
+}
+
+function onMapClick(e) {
+    let lat = e.latlng.lat; // 緯度
+    let lng = e.latlng.lng; // 經度
+
+    marker = new L.marker(e.latlng, {draggable:'true'});
+    marker
+        .on('dragend', function(event){
+            var marker = event.target;
+            var position = marker.getLatLng();
+            lat = position.lat;
+            lng = position.lng;
+            console.log(position);
+            marker
+                .setLatLng(position)
+                .setPopupContent(`緯度：${lat}<br/>經度：${lng}`)
+                .update();
+        })
+        .bindPopup(`緯度：${lat}<br/>經度：${lng}`)
+        .on('click', onMarkerClick);
+    marker.addTo(map);
+
+
+}
+
+map.on('click', onMapClick);
