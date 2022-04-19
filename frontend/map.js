@@ -114,16 +114,36 @@ function onMapClick(e) {
 
 
 const shipForm = (marker) =>{
-    const toHTMLSelect = (options, select_id, label)=>{
+    const VesselToHTMLSelect = (options, select_id, label)=>{
         let $div = $('<div>');
         $div.append($('<label>'), label);
-
+        let hirachic_ship = {}
         let $select = $(`<select id=${select_id}></select>`);
         options.forEach((opt)=>{
-            $select.append($('<option>',{
-                value: opt.id,
-                text: opt.type
-            }));
+            if (hirachic_ship[opt.typename] === undefined)
+                hirachic_ship[opt.typename] = [[opt.id, opt.type_id]];
+            else
+                hirachic_ship[opt.typename].push([opt.id, opt.type_id])
+        });
+        console.log(hirachic_ship);
+        for (const [typename, ships] of Object.entries(hirachic_ship)){
+            let $optgroup = $("<optgroup>", {label:typename});
+            $optgroup.appendTo($select);
+            for (const [id, type_id] of ships){
+                let $option = $("<option>", {text: type_id, value: id});
+                $option.appendTo($optgroup);
+            }
+        }
+        // return $select;
+        return $div.append($select);
+    }
+    const MissileToHTMLSelect = (options, select_id, label)=>{
+        let $div = $('<div>');
+        $div.append($('<label>'), label);
+        let $select = $(`<select id=${select_id}></select>`);
+        options.forEach((opt)=>{
+            let $option = $("<option>", {text: opt.type, value: opt.id});
+            $option.appendTo($select);
         });
         // return $select;
         return $div.append($select);
@@ -133,14 +153,15 @@ const shipForm = (marker) =>{
     const id = marker.options.id;
     const is_enemy = marker.options.is_enemy;
     let $form = $(`<form id="ship-form-${id}" class='form-check-inline'></form>`);
+    $form.append($(`<span value={is_enemy ? "敵方" : "我方"}>`))
     if(is_enemy){
-        $form.append(toHTMLSelect(Enemy, `ship-form-${id}_enemy`, '敵軍艦型'));
-        $form.append(toHTMLSelect(EnemyWeapon, `ship-form-${id}_weapon1`, '敵軍火力1'));
-        $form.append(toHTMLSelect(EnemyWeapon, `ship-form-${id}_weapon2`, '敵軍火力2'));
+        $form.append(VesselToHTMLSelect(Enemy, `ship-form-${id}_enemy`, '艦型'));
+        $form.append(MissileToHTMLSelect(EnemyWeapon, `ship-form-${id}_weapon1`, '火力1'));
+        $form.append(MissileToHTMLSelect(EnemyWeapon, `ship-form-${id}_weapon2`, '火力2'));
     }else{
-        $form.append(toHTMLSelect(Ally, `ship-form-${id}_ally`, '我軍艦型'));
-        $form.append(toHTMLSelect(AllyWeapon, `ship-form-${id}_weapon1`, '我軍火力1'));
-        $form.append(toHTMLSelect(AllyWeapon, `ship-form-${id}_weapon2`, '我軍火力2'));
+        $form.append(VesselToHTMLSelect(Ally, `ship-form-${id}_ally`, '我軍艦型'));
+        $form.append(MissileToHTMLSelect(AllyWeapon, `ship-form-${id}_weapon1`, '火力1'));
+        $form.append(MissileToHTMLSelect(AllyWeapon, `ship-form-${id}_weapon2`, '火力2'));
     }
 
     const toHTMLInput = (defaultValue, input_id, label)=>{
@@ -160,54 +181,66 @@ const shipForm = (marker) =>{
 }
 
 
-const Enemy = [
-    {
-        'id': '1',
-        'type': 'e1'
-    },{
-        'id': '2',
-        'type': 'e2'
-    },{
-        'id': '3',
-        'type': 'e3'
-    },
-]
+// const Enemy = [
+//     {
+//         'id': '1',
+//         'type': 'e1'
+//     },{
+//         'id': '2',
+//         'type': 'e2'
+//     },{
+//         'id': '3',
+//         'type': 'e3'
+//     },
+// ]
+//
+// const Ally = [
+//     {
+//         'id': '1',
+//         'type': 'a1'
+//     },{
+//         'id': '2',
+//         'type': 'a2'
+//     },{
+//         'id': '3',
+//         'type': 'a3'
+//     },
+// ]
 
-const EnemyWeapon = [
-    {
-        'id': '1',
-        'type': 'ew1'
-    },{
-        'id': '2',
-        'type': 'ew2'
-    },{
-        'id': '3',
-        'type': 'ew3'
-    },
-]
 
-const Ally = [
-    {
-        'id': '1',
-        'type': 'a1'
-    },{
-        'id': '2',
-        'type': 'a2'
-    },{
-        'id': '3',
-        'type': 'a3'
-    },
-]
-
-const AllyWeapon = [
-    {
-        'id': '1',
-        'type': 'aw1'
-    },{
-        'id': '2',
-        'type': 'aw2'
-    },{
-        'id': '3',
-        'type': 'aw3'
-    },
-]
+const EnemyWeapon = []
+const AllyWeapon = []
+$.getJSON('http://localhost:8000/api/missile/',function( data ) {
+    $.each( data, function( key, val ) {
+        switch(val['belongs_to']){
+            case 'b': // both
+                EnemyWeapon.push(val);
+                AllyWeapon.push(val);
+                break;
+            case 'e': //enemy
+                EnemyWeapon.push(val);
+                break;
+            case 'a': // ally
+                AllyWeapon.push(val);
+                break;
+        }
+    });
+});
+const Enemy = []
+const Ally = []
+$.getJSON('http://localhost:8000/api/vessel/',function( data ) {
+    $.each( data, function( key, val ) {
+        switch(val['belongs_to']){
+            case 'b': // both
+                Enemy.push(val);
+                Ally.push(val);
+                break;
+            case 'e': //enemy
+                Enemy.push(val);
+                break;
+            case 'a': // ally
+                Ally.push(val);
+                break;
+        }
+    });
+});
