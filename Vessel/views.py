@@ -6,6 +6,7 @@ from Vessel.models import Missile, Vessel
 from Vessel.serializers import MissileSerializer, VesselSerializer
 
 from rest_framework import viewsets
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -27,3 +28,7 @@ class MissileViewSet(ListViewSet):
 class VesselViewSet(ListViewSet):
     queryset = Vessel.objects.all()
     serializer_class = VesselSerializer
+
+
+def redirect(request, z, x, y):
+    return HttpResponseRedirect(f'http://[::]:8080/data/TaiwanEMap/#{z}/{x}/{y}')

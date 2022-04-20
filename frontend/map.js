@@ -1,5 +1,5 @@
 
-const center = [24.998357333095207, 121.57946295231254];
+const center = [23.85260389794438, 119.6];
 L.Map.include({
     getMarkerById: function (id) {
         let marker = null;
@@ -14,23 +14,29 @@ L.Map.include({
     }
 });
 
+
 const map = L.map('map', {
     center: center, // 中心點座標
-    zoom: 15, // 0 - 18
+    zoom: 8, // 0 - 18
     attributionControl: true, // 是否秀出「leaflet」的貢獻標記
     zoomControl: true , // 是否秀出 - + 按鈕
 }).on('click', onMapClick);
 
-// load the map-tile file
-const mb = L.tileLayer.mbTiles("./TaiwanEMap.mbtiles")
-    .on('databaseloaded', function(ev) {
-    console.info('MBTiles DB loaded', ev);
-    })
-    .on('databaseerror', function(ev) {
-    console.info('MBTiles DB error', ev);
-    })
-    .addTo(map);
+// // load the map-tile file
+// const mb = L.tileLayer.mbTiles("./TaiwanEMap.mbtiles")
+//     .on('databaseloaded', function(ev) {
+//     console.info('MBTiles DB loaded', ev);
+//     })
+//     .on('databaseerror', function(ev) {
+//     console.info('MBTiles DB error', ev);
+//     })
+//     .addTo(map);
 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 15,
+    minZoom: 4,
+    id: 'TaiwanEMap',
+}).addTo(map);
 
 function onMarkerClick(){
     const id = this.options.id;
@@ -41,13 +47,18 @@ function onMarkerClick(){
 }
 
 let adding_enemy = true; // 預設為「新增敵人」
-function changeAddingMarker(){
-    adding_enemy = !adding_enemy;
+function AddingEnemyMarker(){
+    adding_enemy = true;
+}
+function AddingAllyMarker(){
+    adding_enemy = false;
 }
 
 class MarkerInfo {
-    constructor(id, is_enemy, lat, lng, ship_id=0, weapon1_id=0, weapon2_id=0) {
+    constructor(id, is_enemy, lat, lng, typename= is_enemy? Enemy[0].typename:Ally[0].typename, type_id= is_enemy? Enemy[0].type_id:Ally[0].type_id, weapon1_id=0, weapon2_id=0) {
         this.id = id;
+        this.typename = typename;
+        this.type_id = type_id;
         this.is_enemy = is_enemy;
         this.lat = lat;
         this.lng = lng;
@@ -77,6 +88,7 @@ function onMapClick(e) {
             icon: adding_enemy ? enemyIcon : allyIcon,
             is_enemy: adding_enemy
         });
+
     new_marker
         .on('dragend', function(event){
             const marker = event.target;
@@ -88,19 +100,29 @@ function onMapClick(e) {
                 .setLatLng(position)
                 .update();
         })
-        // .on('click', onMarkerClick)
-
+        .bindTooltip(()=>{
+            const info = markers_info[new_marker.options.id];
+            return `${info.typename} ${info.type_id}`;
+        }, {
+        direction: 'bottom', // right、left、top、bottom、center。default: auto
+        sticky: false, // true 跟著滑鼠移動。default: false
+        permanent: false, // 是滑鼠移過才出現，還是一直出現
+        opacity: 1.0
+        })
         .bindPopup(`${shipForm(new_marker)}<br/>緯度：${lat}<br/>經度：${lng}`, {maxWidth:'auto', id: new_marker.options.id})
         .on('click', onMarkerClick)
         .addTo(map);
+
+    markers_info[new_marker.options.id] = new MarkerInfo(new_marker.options.id, adding_enemy, lat, lng);
+
     new_marker.openPopup();
     new_marker
         .getPopup().on('remove', function(event){
             const id = event.target.options.id;
             const marker = map.getMarkerById(id);
-
+            console.log(`ship-form-${id}`);
             let $form = document.getElementById(`ship-form-${id}`);
-            for(let i = 0; i < $form.length; i++){
+            for(let i = 0; i < $form.length-2; i++){
                 window.sessionStorage.setItem($form[i].id, $form[i].value);
             }
             // const lat = $form[`ship-form-${id}`+'_lat'].value;
@@ -109,7 +131,6 @@ function onMapClick(e) {
             //     .setLatLng([lat, lng])
             //     .update();
         })
-    markers_info[new_marker.options.id] = new MarkerInfo(new_marker.options.id, adding_enemy, lat, lng);
 }
 
 
@@ -125,7 +146,6 @@ const shipForm = (marker) =>{
             else
                 hirachic_ship[opt.typename].push([opt.id, opt.type_id])
         });
-        console.log(hirachic_ship);
         for (const [typename, ships] of Object.entries(hirachic_ship)){
             let $optgroup = $("<optgroup>", {label:typename});
             $optgroup.appendTo($select);
@@ -164,13 +184,6 @@ const shipForm = (marker) =>{
         $form.append(MissileToHTMLSelect(AllyWeapon, `ship-form-${id}_weapon2`, '火力2'));
     }
 
-    const toHTMLInput = (defaultValue, input_id, label)=>{
-        let $div = $('<div>');
-        $div.append($('<label>'), label);
-        let $input = $(`<input id=${input_id} type='number' step='1e-6' value=${defaultValue} width="60px">`);
-        return $div.append($input);
-    }
-
     const pos = marker.getLatLng();
     const lat = pos.lat;
     const lng = pos.lng;
@@ -180,37 +193,9 @@ const shipForm = (marker) =>{
     return $('<div>').append($form).html();
 }
 
-
-// const Enemy = [
-//     {
-//         'id': '1',
-//         'type': 'e1'
-//     },{
-//         'id': '2',
-//         'type': 'e2'
-//     },{
-//         'id': '3',
-//         'type': 'e3'
-//     },
-// ]
-//
-// const Ally = [
-//     {
-//         'id': '1',
-//         'type': 'a1'
-//     },{
-//         'id': '2',
-//         'type': 'a2'
-//     },{
-//         'id': '3',
-//         'type': 'a3'
-//     },
-// ]
-
-
 const EnemyWeapon = []
 const AllyWeapon = []
-$.getJSON('http://localhost:8000/api/missile/',function( data ) {
+$.getJSON('api/missile/',function( data ) {
     $.each( data, function( key, val ) {
         switch(val['belongs_to']){
             case 'b': // both
@@ -228,7 +213,7 @@ $.getJSON('http://localhost:8000/api/missile/',function( data ) {
 });
 const Enemy = []
 const Ally = []
-$.getJSON('http://localhost:8000/api/vessel/',function( data ) {
+$.getJSON('api/vessel/',function( data ) {
     $.each( data, function( key, val ) {
         switch(val['belongs_to']){
             case 'b': // both
