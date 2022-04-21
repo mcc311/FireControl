@@ -1,4 +1,3 @@
-
 const center = [23.85260389794438, 119.6];
 L.Map.include({
     getMarkerById: function (id) {
@@ -109,7 +108,8 @@ function onMapClick(e) {
         permanent: false, // 是滑鼠移過才出現，還是一直出現
         opacity: 1.0
         })
-        .bindPopup(`${shipForm(new_marker)}<br/>緯度：${lat}<br/>經度：${lng}`, {maxWidth:'auto', id: new_marker.options.id})
+        .bindPopup(`${shipForm(new_marker)}<br/>緯度：${lat}<br/>經度：${lng}`,
+            {maxWidth:'auto', id: new_marker.options.id})
         .on('click', onMarkerClick)
         .addTo(map);
 

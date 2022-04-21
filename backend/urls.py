@@ -16,17 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, register_converter
 from rest_framework.routers import DefaultRouter
-from Vessel import views
+from Vessel.views import MissileViewSet, VesselViewSet
 from . import converters
-from .views import index
+from .views import index, redirect, testPOST
 
 register_converter(converters.FloatUrlParameterConverter, 'float')
 router = DefaultRouter()
-router.register(r'missile', views.MissileViewSet)
-router.register(r'vessel', views.VesselViewSet)
+router.register(r'missile', MissileViewSet)
+router.register(r'vessel', VesselViewSet)
 urlpatterns = [
     path('index/', index),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path(r'map/<int:z>/<float:x>/<float:y>',  views.redirect)
+    path('api/test', testPOST),
+    path(r'map/<int:z>/<float:x>/<float:y>',  redirect),
+
 ]

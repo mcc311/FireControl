@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../frontend/leaflet/leaflet.css" />
+    <script src="../frontend/leaflet/leaflet.js"></script>
+    <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
+    <script src="../frontend/node_modules/jquery/dist/jquery.js"></script>
+    <style>
+        #map {
+            height: 100%; /* or as desired */
+            width: 100%; /* This means "100% of the width of its container", the .col-md-8 */
+            min-height: 100%;
+            min-width: 100%;
+            border: 1px solid black;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<!--<button id="add enemy" onclick="AddingEnemyMarker()">新增敵軍</button>-->
+<!--<button id="add ally" onclick="AddingAllyMarker()">新增我軍</button>-->
+<div id="map"></div>
+<script src="../frontend/handleResult.js"></script>
+<script type="text/javascript">
+    var GeoJSON = JSON.parse('{"Enemy": [{"id": 1, "name": "001\u578b\u822a\u7a7a\u6bcd\u8266", "lat": 23.87579191610102, "lng": 118.14934380620504}, {"id": 2, "name": "002\u578b\u822a\u7a7a\u6bcd\u8266", "lat": 24.73685348477069, "lng": 119.27048673561154}, {"id": 3, "name": "003\u578b\u822a\u7a7a\u6bcd\u8266", "lat": 25.67143436235922, "lng": 120.1262223235995}], "Ally": [{"id": 4, "name": "\u5149\u83ef\u4e09\u865f", "lat": 23.966175871265044, "lng": 119.34742791704139}, {"id": 5, "name": "\u5149\u83ef\u56db\u865f", "lat": 24.80668135385199, "lng": 120.29270528889391}]}');
+    console.log(GeoJSON);
+    for (let ship of GeoJSON['Enemy']) {
+        L.marker([ship.lat, ship.lng],
+            {
+                icon: enemyIcon,
+            })
+            .bindTooltip(`${ship.id}. ${ship.name}`,{
+                direction: 'bottom', // right、left、top、bottom、center。default: auto
+                sticky: false, // true 跟著滑鼠移動。default: false
+                permanent: true, // 是滑鼠移過才出現，還是一直出現
+                opacity: 1.0
+            })
+            .addTo(map);
+    }
+    for (let ship of GeoJSON['Ally']) {
+        L.marker([ship.lat, ship.lng],
+            {
+                icon: allyIcon,
+            }).bindTooltip(`${ship.id}. ${ship.name}`,{
+            direction: 'bottom', // right、left、top、bottom、center。default: auto
+            sticky: false, // true 跟著滑鼠移動。default: false
+            permanent: true, // 是滑鼠移過才出現，還是一直出現
+            opacity: 1.0
+        })
+            .addTo(map);
+    }
+</script>
+</body>
+
+</html>

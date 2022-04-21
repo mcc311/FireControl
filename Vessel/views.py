@@ -30,5 +30,3 @@ class VesselViewSet(ListViewSet):
     serializer_class = VesselSerializer
 
 
-def redirect(request, z, x, y):
-    return HttpResponseRedirect(f'http://[::]:8080/data/TaiwanEMap/#{z}/{x}/{y}')
