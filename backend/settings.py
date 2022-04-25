@@ -123,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/frontend/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend')]
+STATIC_ROOT = STATICFILES_DIRS
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
