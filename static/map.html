@@ -2,11 +2,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="leaflet/leaflet.css" />
-    <script src="leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
     <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
-    <script src="node_modules/Leaflet.TileLayer.MBTiles/Leaflet.TileLayer.MBTiles.js"></script>
-    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="{% static 'node_modules/Leaflet.TileLayer.MBTiles/Leaflet.TileLayer.MBTiles.js' %}"></script>
+    <script src="{% static 'node_modules/jquery/dist/jquery.js' %}"></script>
     <style>
         #map {
             height: 100%; /* or as desired */
@@ -23,5 +23,5 @@
 <!--<button id="add ally" onclick="AddingAllyMarker()">新增我軍</button>-->
 <div id="map"></div>
 </body>
-<script src="map.js"></script>
+<script src="{% static 'map.js' %}"></script>
 </html>

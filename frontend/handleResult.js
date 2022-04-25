@@ -1,13 +1,8 @@
+
 const center = [23.85260389794438, 119.6];
 
-const enemyIcon = L.icon({
-    iconUrl: "../frontend/assets/img/map marker/blue pin.png",
-    iconSize: [30, 48],
-})
-const allyIcon = L.icon({
-    iconUrl: "../frontend/assets/img/map marker/red pin.png",
-    iconSize: [30, 48],
-})
+
+
 
 const map = L.map('map', {
     center: center, // 中心點座標

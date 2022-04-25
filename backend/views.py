@@ -43,3 +43,7 @@ def testPOST(request):
     except :
         context = {}
     return render(request, 'handleResult.html', context)
+
+
+def get_map(request):
+    return render(request, 'map.html')

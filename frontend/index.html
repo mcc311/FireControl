@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
     <title>Dashboard - Brand</title>
-    <link href="../frontend/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../frontend/assets/fonts/fontawesome-all.min.css" rel="stylesheet">
-    <link href="../frontend/assets/fonts/font-awesome.min.css" rel="stylesheet">
-    <link href="../frontend/assets/fonts/fontawesome5-overrides.min.css" rel="stylesheet">
-    <link href="../frontend/assets/css/Map-Clean.css" rel="stylesheet">
+    <link href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/fonts/fontawesome-all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/fonts/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/Map-Clean.css' %}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -108,7 +109,7 @@
                                     <h6 class="dropdown-header">alerts center</h6><a
                                         class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                                                               src="../frontend/assets/img/avatars/avatar4.jpeg">
+                                                                               src="{% static 'assets/img/avatars/avatar4.jpeg' %}">
                                         <div class="bg-success status-indicator"></div>
                                     </div>
                                     <div class="fw-bold">
@@ -118,7 +119,7 @@
                                     </div>
                                 </a><a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                                                               src="../frontend/assets/img/avatars/avatar2.jpeg">
+                                                                               src="{% static 'assets/img/avatars/avatar2.jpeg' %}">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div class="fw-bold">
@@ -128,7 +129,7 @@
                                     </div>
                                 </a><a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                                                               src="../frontend/assets/img/avatars/avatar3.jpeg">
+                                                                               src="{% static 'assets/img/avatars/avatar3.jpeg' %}">
                                         <div class="bg-warning status-indicator"></div>
                                     </div>
                                     <div class="fw-bold">
@@ -138,7 +139,7 @@
                                     </div>
                                 </a><a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image me-3"><img class="rounded-circle"
-                                                                               src="../frontend/assets/img/avatars/avatar5.jpeg">
+                                                                               src="{% static 'assets/img/avatars/avatar5.jpeg' %}">
                                         <div class="bg-success status-indicator"></div>
                                     </div>
                                     <div class="fw-bold">
@@ -159,7 +160,7 @@
                                                                        class="dropdown-toggle nav-link" data-bs-toggle="dropdown"
                                                                        href="#"><span
                                     class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
-                                    class="border rounded-circle img-profile" src="../frontend/assets/img/avatars/avatar1.jpeg"></a>
+                                    class="border rounded-circle img-profile" src="{% static 'assets/img/avatars/avatar1.jpeg' %}"></a>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
                                         class="dropdown-item" href="#"><i
                                         class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
@@ -292,7 +293,7 @@
                                     <iframe id="map-frame"  allowfullscreen=""
                                             frameborder="0"
                                             height="600"
-                                            src="../frontend/map.html"
+                                            src="/map"
                                             width="100%"></iframe>
                                 </section>
                                 <button class="btn btn-primary text-center border rounded d-xxl-flex justify-content-xxl-start"
@@ -478,10 +479,10 @@
     </div>
     <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<script src="../frontend/assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="../frontend/assets/js/chart.min.js"></script>
-<script src="../frontend/assets/js/bs-init.js"></script>
-<script src="../frontend/assets/js/theme.js"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/chart.min.js' %}"></script>
+<script src="{% static 'assets/js/bs-init.js' %}"></script>
+<script src="{% static 'assets/js/theme.js' %}"></script>
 </body>
 
 </html>

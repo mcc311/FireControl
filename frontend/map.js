@@ -76,7 +76,7 @@ function onMapClick(e) {
         iconSize: [30, 48],
     })
     const allyIcon = L.icon({
-        iconUrl: "assets/img/map marker/red pin.png",
+        iconUrl: "static 'assets/img/map marker/red pin.png",
         iconSize: [30, 48],
     })
 
