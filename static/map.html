@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
+    <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
+    <script src="node_modules/Leaflet.TileLayer.MBTiles/Leaflet.TileLayer.MBTiles.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <style>
+        #map {
+            height: 100%; /* or as desired */
+            width: 100%; /* This means "100% of the width of its container", the .col-md-8 */
+            min-height: 100%;
+            min-width: 100%;
+            border: 1px solid black;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<!--<button id="add enemy" onclick="AddingEnemyMarker()">新增敵軍</button>-->
+<!--<button id="add ally" onclick="AddingAllyMarker()">新增我軍</button>-->
+<div id="map"></div>
+</body>
+<script src="map.js"></script>
+</html>

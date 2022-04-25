@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "leaflet": "^1.7.1",
+    "leaflet-tilelayer-mbtiles-ts": "^1.5.8",
+    "Leaflet.TileLayer.MBTiles": "^1.0.0"
+  }
+}
