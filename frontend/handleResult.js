@@ -14,6 +14,7 @@ const map = L.map('map', {
     zoom: 8, // 0 - 18
     attributionControl: true, // 是否秀出「leaflet」的貢獻標記
     zoomControl: true , // 是否秀出 - + 按鈕
+    renderer: L.canvas()
 })
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
