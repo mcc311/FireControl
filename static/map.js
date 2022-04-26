@@ -72,11 +72,11 @@ function onMapClick(e) {
     let lat = e.latlng.lat; // 緯度
     let lng = e.latlng.lng; // 經度
     const enemyIcon = L.icon({
-        iconUrl: "{% static 'assets/img/map marker/blue pin.png' %}",
+        iconUrl: "assets/img/map marker/blue pin.png",
         iconSize: [30, 48],
     })
     const allyIcon = L.icon({
-        iconUrl: "{% static 'assets/img/map marker/red pin.png' %}",
+        iconUrl: "static 'assets/img/map marker/red pin.png",
         iconSize: [30, 48],
     })
 

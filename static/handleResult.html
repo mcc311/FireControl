@@ -1,9 +1,10 @@
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
-    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'node_modules/leaflet/dist/leaflet.css' %}" />
+    <script src="{% static 'node_modules/leaflet/dist/leaflet.js' %}"></script>
     <script src="{% static 'node_modules/jquery/dist/jquery.js' %}"></script>
     <style>
         #map {
@@ -20,10 +21,22 @@
 <!--<button id="add enemy" onclick="AddingEnemyMarker()">新增敵軍</button>-->
 <!--<button id="add ally" onclick="AddingAllyMarker()">新增我軍</button>-->
 <div id="map"></div>
+<script>
+    const enemyIcon = L.icon({
+        iconUrl : "{% static 'assets/img/map marker/blue pin.png' %}",
+        iconSize: [30, 48],
+    });
+    const allyIcon = L.icon({
+        iconUrl: "{% static 'assets/img/map marker/red pin.png' %}",
+        iconSize: [30, 48],
+    })
+
+</script>
 <script src="{% static 'handleResult.js' %}"></script>
 <script type="text/javascript">
-    var GeoJSON = JSON.parse('{"Enemy": [{"id": 1, "name": "001\u578b\u822a\u7a7a\u6bcd\u8266", "lat": 23.87579191610102, "lng": 118.14934380620504}, {"id": 2, "name": "002\u578b\u822a\u7a7a\u6bcd\u8266", "lat": 24.73685348477069, "lng": 119.27048673561154}, {"id": 3, "name": "003\u578b\u822a\u7a7a\u6bcd\u8266", "lat": 25.67143436235922, "lng": 120.1262223235995}], "Ally": [{"id": 4, "name": "\u5149\u83ef\u4e09\u865f", "lat": 23.966175871265044, "lng": 119.34742791704139}, {"id": 5, "name": "\u5149\u83ef\u56db\u865f", "lat": 24.80668135385199, "lng": 120.29270528889391}]}');
-    var Policy = JSON.parse('[{"latlng": [23.966175871265044, 119.34742791704139], "t_latlng": [23.87579191610102, 118.14934380620504], "missile": {"1": {"type": "\u9676\u6c0f\u53cd\u88dd\u7532\u98db\u5f48", "num": 0}, "2": {"type": "\u96c4\u98a83\u865f", "num": 0}}, "ae_pair": [4, 1]}, {"latlng": [23.966175871265044, 119.34742791704139], "t_latlng": [24.73685348477069, 119.27048673561154], "missile": {"1": {"type": "\u9676\u6c0f\u53cd\u88dd\u7532\u98db\u5f48", "num": 1}, "2": {"type": "\u96c4\u98a83\u865f", "num": 1}}, "ae_pair": [4, 2]}, {"latlng": [23.966175871265044, 119.34742791704139], "t_latlng": [25.67143436235922, 120.1262223235995], "missile": {"1": {"type": "\u9676\u6c0f\u53cd\u88dd\u7532\u98db\u5f48", "num": 1}, "2": {"type": "\u96c4\u98a83\u865f", "num": 1}}, "ae_pair": [4, 3]}, {"latlng": [24.80668135385199, 120.29270528889391], "t_latlng": [23.87579191610102, 118.14934380620504], "missile": {"1": {"type": "\u5929\u4f7f\u98db\u5f48", "num": 1}, "2": {"type": "\u96c4\u98a82\u865f", "num": 0}}, "ae_pair": [5, 1]}, {"latlng": [24.80668135385199, 120.29270528889391], "t_latlng": [24.73685348477069, 119.27048673561154], "missile": {"1": {"type": "\u5929\u4f7f\u98db\u5f48", "num": 0}, "2": {"type": "\u96c4\u98a82\u865f", "num": 3}}, "ae_pair": [5, 2]}, {"latlng": [24.80668135385199, 120.29270528889391], "t_latlng": [25.67143436235922, 120.1262223235995], "missile": {"1": {"type": "\u5929\u4f7f\u98db\u5f48", "num": 0}, "2": {"type": "\u96c4\u98a82\u865f", "num": 1}}, "ae_pair": [5, 3]}]')
+    var GeoJSON = JSON.parse('{{situation|safe}}')
+
+    var Policy = JSON.parse('{{ policy|safe }}')
     console.log(GeoJSON);
     for (let ship of GeoJSON['Enemy']) {
         L.marker([ship.lat, ship.lng],
@@ -50,22 +63,16 @@
         })
             .addTo(map);
     }
-    for (let policy of Policy){
-        if (policy['missile'].length > 0){
-            let description = "";
-            for (let missile of  policy['missile']){
-                description += `${policy['ae_pair'][0]}-${missile['wid']}. ${missile['type']}<br>`;
-            }
-            let line = new L.polyline([policy['latlng'], policy['t_latlng']])
-                .bindPopup(description, {
-                    autoClose: false
-                })
-                .addTo(map);
-            line.openPopup()
+    for (let line of Policy){
+        let discription = '';
+        for(const [k, missile] of Object.entries(line['missile'])){
+            console.log(k, missile);
+            discription += `${missile['type']} * ${missile['num']}</br>`;
 
         }
-
+        L.polyline([line['latlng'], line['t_latlng']],).bindTooltip(discription, { direction: 'bottom', sticky:true}).addTo(map);
     }
+
 </script>
 </body>
 
