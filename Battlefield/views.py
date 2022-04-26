@@ -39,7 +39,6 @@ def testPOST(request):
                 Policy.append(value)
         b = Battlefield(situation=data, policy=Policy)
         b.save()
-        context = {'GeoJSON': json.dumps(data), 'Policy': json.dumps(Policy)}
 
     return redirect(f'../map/{b.id}')
 
@@ -49,5 +48,5 @@ def get_result(request, bid):
     b = Battlefield.objects.filter(id=bid)
     if b:
         b = b[0]
-        context = {'GeoJSON': json.dumps(b.situation), 'Policy': json.dumps(b.policy)}
+        context = {'situation': json.dumps(b.situation), 'policy': json.dumps(b.policy)}
     return render(request, 'handleResult.html', context)
