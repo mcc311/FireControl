@@ -3,7 +3,6 @@ const center = [23.85260389794438, 119.6];
 
 
 
-
 const map = L.map('map', {
     center: center, // 中心點座標
     zoom: 8, // 0 - 18

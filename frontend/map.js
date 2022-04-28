@@ -71,14 +71,14 @@ markers_info = {}
 function onMapClick(e) {
     let lat = e.latlng.lat; // 緯度
     let lng = e.latlng.lng; // 經度
-    const enemyIcon = L.icon({
-        iconUrl: "assets/img/map marker/blue pin.png",
-        iconSize: [30, 48],
-    })
-    const allyIcon = L.icon({
-        iconUrl: "static 'assets/img/map marker/red pin.png",
-        iconSize: [30, 48],
-    })
+    // const enemyIcon = L.icon({
+    //     iconUrl: "assets/img/map marker/blue pin.png",
+    //     iconSize: [30, 48],
+    // })
+    // const allyIcon = L.icon({
+    //     iconUrl: "static 'assets/img/map marker/red pin.png",
+    //     iconSize: [30, 48],
+    // })
 
     let new_marker = new L.marker(e.latlng,
         {
@@ -195,7 +195,7 @@ const shipForm = (marker) =>{
 
 const EnemyWeapon = []
 const AllyWeapon = []
-$.getJSON('api/missile/',function( data ) {
+$.getJSON('/api/missile/',function( data ) {
     $.each( data, function( key, val ) {
         switch(val['belongs_to']){
             case 'b': // both
@@ -213,7 +213,7 @@ $.getJSON('api/missile/',function( data ) {
 });
 const Enemy = []
 const Ally = []
-$.getJSON('api/vessel/',function( data ) {
+$.getJSON('/api/vessel/',function( data ) {
     $.each( data, function( key, val ) {
         switch(val['belongs_to']){
             case 'b': // both

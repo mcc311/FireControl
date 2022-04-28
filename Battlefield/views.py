@@ -50,3 +50,7 @@ def get_result(request, bid):
         b = b[0]
         context = {'situation': json.dumps(b.situation), 'policy': json.dumps(b.policy)}
     return render(request, 'handleResult.html', context)
+
+def get_map(request):
+    context = {}
+    return render(request, 'map.html', context)

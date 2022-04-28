@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
-    <script src="leaflet/leaflet.js"></script>
-    <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
-    <script src="node_modules/Leaflet.TileLayer.MBTiles/Leaflet.TileLayer.MBTiles.js"></script>
-    <script src="static 'node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="{% static 'node_modules/leaflet/dist/leaflet.css' %}" />
+    <script src="{% static 'node_modules/leaflet/dist/leaflet.js' %}"></script>
+    <script src="{% static 'node_modules/jquery/dist/jquery.js' %}"></script>
     <style>
         #map {
             height: 100%; /* or as desired */
@@ -23,6 +22,16 @@
 <!--<button id="add enemy" onclick="AddingEnemyMarker()">新增敵軍</button>-->
 <!--<button id="add ally" onclick="AddingAllyMarker()">新增我軍</button>-->
 <div id="map"></div>
+<script>
+    const enemyIcon = L.icon({
+        iconUrl : "{% static 'assets/img/map marker/blue pin.png' %}",
+        iconSize: [30, 48],
+    });
+    const allyIcon = L.icon({
+        iconUrl: "{% static 'assets/img/map marker/red pin.png' %}",
+        iconSize: [30, 48],
+    })
+</script>
 </body>
-<script src="map.js"></script>
+<script src="{% static 'map.js' %}"></script>
 </html>
