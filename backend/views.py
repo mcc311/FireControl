@@ -16,10 +16,10 @@ def table(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'table.html')
 
-def handler404(request):
-    response = render(request, '404.html')
-    response.status_code = 404
-    return response
+# def handler404(request):
+#     response = render(request, '404.html')
+#     response.status_code = 404
+#     return response
 def redirect(request, z, x, y):
     return HttpResponseRedirect(f'http://[::]:8080/data/TaiwanEMap/#{z}/{x}/{y}')
 
