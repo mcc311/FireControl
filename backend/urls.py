@@ -18,7 +18,7 @@ from django.urls import path, include, register_converter
 from rest_framework.routers import DefaultRouter
 from Vessel.views import MissileViewSet, VesselViewSet
 from . import converters
-from .views import index, redirect
+from .views import index, redirect, profile, login, table, handler404
 from Battlefield.views import testPOST, get_result, get_map
 register_converter(converters.FloatUrlParameterConverter, 'float')
 router = DefaultRouter()
@@ -26,11 +26,14 @@ router.register(r'missile', MissileViewSet)
 router.register(r'vessel', VesselViewSet)
 urlpatterns = [
     path('index/', index),
+    path('porfile/', profile),
+    path('login/', login),
+    path('table/', table),
+    path('404/', handler404),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/test', testPOST),
     path(r'map/', get_map),
     path(r'map/<int:bid>', get_result),
-    path(r'map/<int:z>/<float:x>/<float:y>',  redirect),
 
 ]
