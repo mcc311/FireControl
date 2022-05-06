@@ -53,7 +53,7 @@ urlpatterns = [
     path('api/getPolicy', testPOST),
     path(r'map/', get_map),
     path(r'map/<int:bid>', get_result, name='get_result'),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('api/doc', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    # path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
 ]
