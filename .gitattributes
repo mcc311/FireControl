@@ -1,2 +1,0 @@
-*.mbtiles filter=lfs diff=lfs merge=lfs -text
-TaiwanEMap.mbtiles filter=lfs diff=lfs merge=lfs -text
