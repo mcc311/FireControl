@@ -19,7 +19,7 @@ from rest_framework.routers import DefaultRouter
 from Vessel.views import MissileViewSet, VesselViewSet
 # from Battlefield.views import BattlefieldView
 from . import converters
-from .views import index, redirect, profile, login, table, handler404
+from .views import index, profile, login, table, handler404, VesselListView, VesselUpdateView, MissileUpdateView, MissileListView
 from Battlefield.views import testPOST, get_result, get_map
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -43,10 +43,14 @@ router = DefaultRouter()
 router.register(r'missile', MissileViewSet)
 router.register(r'vessel', VesselViewSet)
 urlpatterns = [
+    path('', index),
     path('index/', index),
     path('profile/', profile),
     path('login/', login),
-    path('table/', table),
+    path('table/vessel', VesselListView.as_view(), name='vessel_table'),
+    path('table/vessel/<int:pk>', VesselUpdateView.as_view(success_url="/table/vessel"), name='vessel_update_table'),
+    path('table/missile', MissileListView.as_view(), name='missile_table'),
+    path('table/missile/<int:pk>', MissileUpdateView.as_view(success_url="/table/missile"), name='missile_update_table'),
     path('404/', handler404),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),

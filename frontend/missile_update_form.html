@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Table - Brand</title>
     {% include 'head.html' %}
+    <style>
+        tr:hover
+        {
+           background-color: rgba(234, 231, 231, 0.96)
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -21,47 +27,27 @@
                             <p class="text-primary m-0 fw-bold">船艦資訊</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 text-nowrap">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
-                                                <option value="10" selected="">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>&nbsp;</label></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                                </div>
-                            </div>
-                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                <table class="table my-0" id="dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for vessel in Vessels %}
-                                        <tr>
-                                            <td>{{ vessel.type_id }}</td>
-                                            <td>{{ vessel.typename }}</td>
-                                            <td>{{ vessel.belongs_to }}</td>
-                                            <td>{{ vessel.value }}</td>
-                                            {% for fire in vessel.default_fires.all %}
-                                                <td>{{ fire }}</td>
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
 
-                                    </tfoot>
-                                </table>
-                            </div>
+                             <form method="POST">{% csrf_token %}
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3"><label class="form-label"><strong>彈型</strong></label><br>{{ form.type }}</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3"><label class="form-label"><strong>預設負荷量</strong></label><br>{{ form.default_num }}</div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3"><label class="form-label"><strong>隸屬</strong></label><br>{{ form.belongs_to }}</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3"><label class="form-label"><strong>毀傷度</strong></label><br>{{ form.damage }}</div>
+                                    </div>
+                                </div>
+                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+                            </form>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
                                     <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>

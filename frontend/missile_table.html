@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Table - Brand</title>
     {% include 'head.html' %}
+    <style>
+        tr:hover
+        {
+           background-color: rgba(234, 231, 231, 0.96)
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -18,7 +24,7 @@
                     <h3 class="text-dark mb-4">船艦、載具</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">船艦資訊</p>
+                            <a href="{% url 'vessel_table' %}"><p class="text-primary m-0 fw-bold">船艦資訊</a> | <a >武器資訊</p></a>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -38,24 +44,19 @@
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>彈型</th>
+                                            <th>預設負荷量</th>
+                                            <th>隸屬</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {% for vessel in Vessels %}
+                                    {% for missile in missile_list %}
                                         <tr>
-                                            <td>{{ vessel.type_id }}</td>
-                                            <td>{{ vessel.typename }}</td>
-                                            <td>{{ vessel.belongs_to }}</td>
-                                            <td>{{ vessel.value }}</td>
-                                            {% for fire in vessel.default_fires.all %}
-                                                <td>{{ fire }}</td>
-                                            {% endfor %}
+                                            <td><a href="missile/{{missile.id}}">{{ missile.type }}</a></td>
+                                            <td>{{ missile.default_num }}</td>
+                                            <td>{% if missile.belongs_to == 'a'%}我軍{% else %}敵軍{% endif %}</td>
+                                            <td>{{ missile.damage }}</td>
+
                                         </tr>
                                     {% endfor %}
 
