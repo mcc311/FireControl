@@ -11,7 +11,7 @@ const map = L.map('map', {
     renderer: L.canvas()
 })
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('http://localhost:3650/api/maps/map/{z}/{x}/{y}.png', {
     maxZoom: 15,
     minZoom: 4,
     id: 'TaiwanEMap',
