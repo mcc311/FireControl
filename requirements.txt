@@ -7,3 +7,5 @@ whitenoise
 drf_yasg
 pytorch
 gym
+pytorch
+gym
