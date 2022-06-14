@@ -23,7 +23,7 @@ class MissileListView(generic.ListView):
 
 class MissileUpdateView(generic.edit.UpdateView):
     model = Missile
-    fields = ['type', 'default_num', 'belongs_to', 'damage']
+    fields = ['type', 'default_num', 'belongs_to', 'damage', 'cost']
     template_name = 'missile_update_form.html'
 
 

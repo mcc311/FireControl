@@ -31,22 +31,24 @@
                              <form method="POST">{% csrf_token %}
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"><strong>彈型</strong></label><br>{{ form.type }}</div>
+                                        <div class="mb-3"><label class="form-label"><strong>艦級/艦型</strong></label><br>{{ form.type_id }}</div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"><strong>預設負荷量</strong></label><br>{{ form.default_num }}</div>
+                                        <div class="mb-3"><label class="form-label"><strong>艦種</strong></label><br>{{ form.typename }}</div>
                                     </div>
-
-                                </div>
-                                <div class="row">
                                     <div class="col">
                                         <div class="mb-3"><label class="form-label"><strong>隸屬</strong></label><br>{{ form.belongs_to }}</div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"><strong>毀傷度</strong></label><br>{{ form.damage }}</div>
+                                        <div class="mb-3"><label class="form-label"><strong>價值</strong></label><br>{{ form.value }}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3"><label class="form-label"><strong>預設火力1/最大火力</strong></label><br>{{ form.fire1 }}</div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label"><strong>單發成本</strong></label><br>{{ form.cost }}</div>
+                                        <div class="mb-3"><label class="form-label"><strong>預設火力2</strong></label><br>{{ form.fire2 }}</div>
                                     </div>
                                 </div>
                                 <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
