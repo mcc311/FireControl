@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="{% static 'node_modules/leaflet/dist/leaflet.css' %}" />
+    <link rel="stylesheet" href="{% static 'node_modules/leaflet/dist/leaflet.css' %}"/>
     <script src="{% static 'node_modules/leaflet/dist/leaflet.js' %}"></script>
     <script src="{% static 'node_modules/jquery/dist/jquery.js' %}"></script>
     <style>
         #map {
-            height: 100%; /* or as desired */
+            height: 600px; /* or as desired */
             width: 100%; /* This means "100% of the width of its container", the .col-md-8 */
             min-height: 100%;
             min-width: 100%;
@@ -16,14 +16,61 @@
             border-radius: 8px;
         }
     </style>
+    {% include 'head.html' %}
 </head>
+
+
 <body>
+
+<div class="wrapper">
+    <div id="dd" class="d-flex flex-column">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class='col col-lg-7 col-xl-8'>
+                        <section class="map-clean">
+                            <div id="map"></div>
+                        </section>
+                    </div>
+                    <div class="col col-lg-5 col-xl-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="text-primary fw-bold m-0">決策結果</h6>
+                                <div class="dropdown no-arrow">
+                                    <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false"
+                                            data-bs-toggle="dropdown" type="button"><i
+                                            class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+                                        <p class="text-center dropdown-header">dropdown header:</p><a
+                                            class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item"
+                                                                                              href="#">&nbsp;Another
+                                        action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">&nbsp;Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">(1) 光華3號: <br>天使飛彈 *1 > (3) 遼寧號<br>=雄風三號 *2 > (3) 002型<br>
+                                (1) 光華3號: <br>天使飛彈 *1 > (3) 遼寧號<br>
+                                (1) 光華3號: <br>天使飛彈 *1 > (3) 遼寧號<br></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--<button id="add enemy" onclick="AddingEnemyMarker()">新增敵軍</button>-->
 <!--<button id="add ally" onclick="AddingAllyMarker()">新增我軍</button>-->
-<div id="map"></div>
+
+
 <script>
     const enemyIcon = L.icon({
-        iconUrl : "{% static 'assets/img/map marker/blue pin.png' %}",
+        iconUrl: "{% static 'assets/img/map marker/blue pin.png' %}",
         iconSize: [30, 48],
     });
     const allyIcon = L.icon({
@@ -43,7 +90,7 @@
             {
                 icon: enemyIcon,
             })
-            .bindTooltip(`${ship.id}. ${ship.name}`,{
+            .bindTooltip(`${ship.id}. ${ship.name}`, {
                 direction: 'bottom', // right、left、top、bottom、center。default: auto
                 sticky: false, // true 跟著滑鼠移動。default: false
                 permanent: true, // 是滑鼠移過才出現，還是一直出現
@@ -55,7 +102,7 @@
         L.marker([ship.lat, ship.lng],
             {
                 icon: allyIcon,
-            }).bindTooltip(`${ship.id}. ${ship.name}`,{
+            }).bindTooltip(`${ship.id}. ${ship.name}`, {
             direction: 'bottom', // right、left、top、bottom、center。default: auto
             sticky: false, // true 跟著滑鼠移動。default: false
             permanent: true, // 是滑鼠移過才出現，還是一直出現
@@ -63,17 +110,19 @@
         })
             .addTo(map);
     }
-    for (let line of Policy){
+    for (let line of Policy) {
         let discription = '';
-        for(const [k, missile] of Object.entries(line['missile'])){
+        for (const [k, missile] of Object.entries(line['missile'])) {
             console.log(k, missile);
             discription += `${missile['type']} * ${missile['num']}</br>`;
 
         }
-        L.polyline([line['latlng'], line['t_latlng']],).bindTooltip(discription, { direction: 'bottom', sticky:true}).addTo(map);
+        L.polyline([line['latlng'], line['t_latlng']],).bindTooltip(discription, {
+            direction: 'bottom',
+            sticky: true
+        }).addTo(map);
     }
 
 </script>
 </body>
-
 </html>

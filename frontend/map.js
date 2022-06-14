@@ -43,6 +43,7 @@ function onMarkerClick(){
     for(let i = 0; i < $form.length-2; i++){
         $form[i].value = window.sessionStorage.getItem($form[i].id);
     }
+
 }
 
 let adding_enemy = true; // 預設為「新增敵人」
@@ -71,14 +72,11 @@ markers_info = {}
 function onMapClick(e) {
     let lat = e.latlng.lat; // 緯度
     let lng = e.latlng.lng; // 經度
-    // const enemyIcon = L.icon({
-    //     iconUrl: "assets/img/map marker/blue pin.png",
-    //     iconSize: [30, 48],
-    // })
-    // const allyIcon = L.icon({
-    //     iconUrl: "static 'assets/img/map marker/red pin.png",
-    //     iconSize: [30, 48],
-    // })
+    let $form = document.getElementById('battlefield');
+    let $ship_form = $("<div>");
+    $ship_form.append($("<input>", {value:'123'}));
+    console.log($ship_form.html());
+    $("#battlefield").append($ship_form.html());
 
     let new_marker = new L.marker(e.latlng,
         {

@@ -31,7 +31,7 @@ const map = L.map('map', {
 //     })
 //     .addTo(map);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('http://localhost:3650/api/maps/map/{z}/{x}/{y}.png', {
     maxZoom: 15,
     minZoom: 4,
     id: 'TaiwanEMap',
@@ -43,6 +43,7 @@ function onMarkerClick(){
     for(let i = 0; i < $form.length-2; i++){
         $form[i].value = window.sessionStorage.getItem($form[i].id);
     }
+
 }
 
 let adding_enemy = true; // 預設為「新增敵人」
@@ -71,14 +72,10 @@ markers_info = {}
 function onMapClick(e) {
     let lat = e.latlng.lat; // 緯度
     let lng = e.latlng.lng; // 經度
-    // const enemyIcon = L.icon({
-    //     iconUrl: "assets/img/map marker/blue pin.png",
-    //     iconSize: [30, 48],
-    // })
-    // const allyIcon = L.icon({
-    //     iconUrl: "static 'assets/img/map marker/red pin.png",
-    //     iconSize: [30, 48],
-    // })
+    let $form = document.getElementById('battlefield');
+    let $ship_form = $('div');
+    $ship_form.innerHtml += $('input', {value:'12334'});
+    $form.innerHtml += $ship_form;
 
     let new_marker = new L.marker(e.latlng,
         {

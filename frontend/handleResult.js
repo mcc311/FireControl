@@ -16,4 +16,3 @@ L.tileLayer('http://localhost:3650/api/maps/map/{z}/{x}/{y}.png', {
     minZoom: 4,
     id: 'TaiwanEMap',
 }).addTo(map);
-
