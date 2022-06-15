@@ -20,7 +20,7 @@ from Vessel.views import MissileViewSet, VesselViewSet
 # from Battlefield.views import BattlefieldView
 from . import converters
 from .views import index, profile, login, table, handler404, VesselListView, VesselUpdateView, MissileUpdateView, MissileListView
-from Battlefield.views import testPOST, get_result, get_map
+from Battlefield.views import testPOST, get_result, get_map, get_policy_index_ver
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -45,6 +45,7 @@ router.register(r'vessel', VesselViewSet)
 urlpatterns = [
     path('', index),
     path('index/', index),
+    path('get_policy/', get_policy_index_ver),
     path('profile/', profile),
     path('login/', login),
     path('table/vessel', VesselListView.as_view(), name='vessel_table'),

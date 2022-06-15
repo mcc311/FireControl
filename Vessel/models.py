@@ -9,6 +9,7 @@ class Missile(models.Model):
     default_num = models.IntegerField(null=False, default=2)
     belongs_to = models.CharField(max_length=1, choices=BELONG_STATE, default='b')
     damage = models.FloatField(null=False, default=.5)
+    cost = models.FloatField(null=False, default=.5)
 
     def __str__(self):
         return self.type
@@ -24,7 +25,8 @@ class Vessel(models.Model):
     belongs_to = models.CharField(max_length=1, choices=BELONG_STATE, default='b')
     fire1 = models.ForeignKey(Missile, default=1, on_delete=models.SET_DEFAULT, related_name='fire1')
     fire2 = models.ForeignKey(Missile, default=1, on_delete=models.SET_DEFAULT, related_name='fire2')
-
+    def __str__(self):
+        return f"{self.typename}({self.type_id})"
     class Meta:
         unique_together = [('typename', 'type_id')]
 

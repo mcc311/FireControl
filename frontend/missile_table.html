@@ -47,6 +47,8 @@
                                             <th>彈型</th>
                                             <th>預設負荷量</th>
                                             <th>隸屬</th>
+                                            <th>毀傷度</th>
+                                            <th>單發成本</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,6 +58,7 @@
                                             <td>{{ missile.default_num }}</td>
                                             <td>{% if missile.belongs_to == 'a'%}我軍{% else %}敵軍{% endif %}</td>
                                             <td>{{ missile.damage }}</td>
+                                            <td>{{ missile.cost }}</td>
 
                                         </tr>
                                     {% endfor %}

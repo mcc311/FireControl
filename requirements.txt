@@ -5,7 +5,5 @@ gunicorn==20.1.0
 django-cors-headers
 whitenoise
 drf_yasg
-pytorch
 gym
-pytorch
-gym
+stable_baselines3
