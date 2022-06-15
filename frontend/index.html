@@ -219,10 +219,15 @@
                                                     }))
                                                         .done(function (data) {
                                                             let text_results = data.text_result;
+                                                            console.log(data);
                                                             let flag = "true";
                                                             let active ="active";
+                                                            $("#pills-tab").empty();
+                                                            $("#pills-tabContent").empty();
+
                                                             for (const [o_id, text] of Object.entries(text_results)){
                                                                 console.log(o_id);
+                                                                var t = text;
                                                                 console.log(text);
                                                                 let label = $(`#${o_id} ~ label`).text();
                                                                 let $li = $("<li>", {class:"nav-item", role:"presentation"});
@@ -236,7 +241,7 @@
                                                                 $("#pills-tab").append($li);
                                                                 $("#pills-tabContent").append($(`<div class="tab-pane fade show ${active}"
                                                                                                 id="pills-${label}" role="tabpanel"
-                                                                                                aria-labelledby="pills-${label}-tab">${text}
+                                                                                                aria-labelledby="pills-${label}-tab">${text.replaceAll("\n", '<br>')}
                                                                                                 </div>`));
                                                                 flag = "false";
                                                                 active = "";

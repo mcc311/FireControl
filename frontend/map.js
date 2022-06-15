@@ -87,7 +87,7 @@ function onMapClick(e) {
         })
         .bindTooltip(()=>{
             const info = markers_info[new_marker.options.id];
-            return `${info.typename} ${info.type_id}`;
+            return `(${info.id}) ${info.typename} ${info.type_id}`;
         }, {
         direction: 'bottom', // right、left、top、bottom、center。default: auto
         sticky: false, // true 跟著滑鼠移動。default: false
@@ -110,6 +110,10 @@ function onMapClick(e) {
             for(let i = 0; i < $form.length; i++){
                 window.sessionStorage.setItem($form[i].id, $form[i].value);
             }
+            let info = markers_info[new_marker.options.id];
+            let new_ship = Vessel[$form[0].value];
+            info.typename = new_ship.typename;
+            info.type_id = new_ship.type_id;
             // const lat = $form[`ship-form-${id}`+'_lat'].value;
             // const lng = $form[`ship-form-${id}`+'_lng'].value;
             // event.target
@@ -196,8 +200,10 @@ $.getJSON('/api/missile/',function( data ) {
 });
 const Enemy = []
 const Ally = []
+const Vessel = {};
 $.getJSON('/api/vessel/',function( data ) {
     $.each( data, function( key, val ) {
+        Vessel[val.id]=val;
         switch(val['belongs_to']){
             case 'b': // both
                 Enemy.push(val);

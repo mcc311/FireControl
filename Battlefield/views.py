@@ -229,7 +229,6 @@ def get_policy_index_ver(request):
         return text_result
     text_results = {}
     for k, a in c.items():
-        print(k)
         text_results[k] = action_to_text(a)
 
-    return Response({'success': 200, 'result': c.values(), 'text_result':text_results})
+    return Response({'success': 200, 'result': c.values(), 'text_result': text_results})
