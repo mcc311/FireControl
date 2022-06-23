@@ -2,7 +2,7 @@ import gym
 import numpy as np
 from gym import spaces
 from stable_baselines3 import A2C
-
+import time
 
 class FireControlEnv(gym.Env):
     """Custom Environment that follows gym interface"""
@@ -83,6 +83,7 @@ class FireControlEnv(gym.Env):
 
 def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, checked, alpha_v=0, alpha_q=0, alpha_t=0, alpha_u=0):
     actions = {}
+    times = {}
     e_num = len(enemies)
     a_num = len(allies)
     w_num = len(weapons)
@@ -90,7 +91,7 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
     if '1_to_1' in checked:
         n_fight = np.min([a_num, e_num - 1])
         if 't-first' in checked:  # 威脅度優先
-
+            tstart = time.time()
             e_to_fight = np.argpartition(t_matrix * v_matrix, -n_fight)[-n_fight:]
             a_to_fight = np.random.choice(a_num, n_fight, replace=False)*2
             action = np.zeros((len(weapons), len(enemies)))
@@ -98,7 +99,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[[a, a+1], e] = 1
             action = (action.T * u_matrix).T
             actions['t-first'] = action
+            times['t-first'] = time.time()-tstart
         if 'd-first' in checked:
+            tstart = time.time()
             d_array = np.zeros(a_num)
             for w_id, d in enumerate(d_matrix):
                 d_array[w_id//2] += d * u_matrix[w_id]
@@ -110,8 +113,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[[a, a+1], e] = 1
             action = (action.T * u_matrix).T
             actions['d-first'] = action
-
+            times['d-first'] = time.time() - tstart
         if 'mix' in checked:
+            tstart = time.time()
             d_array = np.zeros(a_num)
             for w_id, d in enumerate(d_matrix):
                 d_array[w_id//2] += d * u_matrix[w_id]
@@ -123,7 +127,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[[a, a+1], e] = 1
             action = (action.T * u_matrix).T
             actions['mix'] = action
+            times['mix'] = time.time() - tstart
         if 't-cost' in checked:  # 威脅度優先
+            tstart = time.time()
             cp_array = 1 / c_matrix
             for a_id in range(a_num):
                 w_id = 2*a_id
@@ -138,7 +144,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['t-cost'] = action
+            times['t-cost'] = time.time() - tstart
         if 'd-cost' in checked:  # 威脅度優先
+            tstart = time.time()
             cp_array = d_matrix / c_matrix
             for a_id in range(a_num):
                 w_id = 2*a_id
@@ -153,7 +161,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['d-cost'] = action
+            times['d-cost'] = time.time() - tstart
         if 'mix-cost' in checked:  # 威脅度優先
+            tstart = time.time()
             cp_array = d_matrix / c_matrix
             for a_id in range(a_num):
                 w_id = 2*a_id
@@ -168,8 +178,10 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['mix-cost'] = action
-        return actions
+            times['mix-cost'] = time.time() - tstart
+        return actions, times, '1_to_1'
     elif '1_to_m' in checked:
+        tstart = time.time()
         n_fight = np.min([w_num, e_num - 1])
         if 't-first' in checked:  # 威脅度優先
 
@@ -180,7 +192,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['t-first'] = action
+            times['t-first'] = time.time() - tstart
         if 'd-first' in checked:
+            tstart = time.time()
             w_to_fight = np.argpartition(d_matrix, -n_fight)[-n_fight:]
             e_to_fight = np.argpartition(v_matrix, -n_fight)[-n_fight:]
 
@@ -189,8 +203,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['d-first'] = action
-
+            times['d-first'] = time.time() - tstart
         if 'mix' in checked:
+            tstart = time.time()
             w_to_fight = np.argpartition(d_matrix, -n_fight)[-n_fight:]
             e_to_fight = np.argpartition(t_matrix * v_matrix, -n_fight)[-n_fight:]
 
@@ -199,7 +214,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['mix'] = action
+            times['mix'] = time.time() - tstart
         if 't-cost' in checked:  # 威脅度優先
+            tstart = time.time()
             cp_array = 1 / c_matrix
 
             e_to_fight = np.argpartition(t_matrix * v_matrix, -n_fight)[-n_fight:]
@@ -209,7 +226,9 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['t-cost'] = action
+            times['t-cost'] = time.time() - tstart
         if 'd-cost' in checked:  # 威脅度優先
+            tstart = time.time()
             cp_array = d_matrix / c_matrix
 
             e_to_fight = np.argpartition(v_matrix, -n_fight)[-n_fight:]
@@ -219,7 +238,10 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['d-cost'] = action
+            times['d-cost'] = time.time() - tstart
+
         if 'mix-cost' in checked:  # 威脅度優先
+            tstart = time.time()
             cp_array = d_matrix / c_matrix
 
             e_to_fight = np.argpartition(t_matrix * v_matrix, -n_fight)[-n_fight:]
@@ -229,8 +251,11 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
                 action[w, e] = 1
             action = (action.T * u_matrix).T
             actions['mix-cost'] = action
-        return actions
+            times['mix-cost'] = time.time() - tstart
+
+        return actions, times, '1_to_m'
     if 'n_to_m' in checked:
+
         def train(env):
             model = A2C("MlpPolicy", env, verbose=False)
             model.learn(total_timesteps=2000)
@@ -244,35 +269,42 @@ def get_opt_policy(enemies, allies, weapons, t_matrix, d_matrix, v_matrix, u_mat
             return max(record, key=lambda x: x[1])[0]
 
         if 't-first' in checked:
+            tstart = time.time()
             env = FireControlEnv(enemies, weapons, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, alpha_t=1)
             actions['t-first'] = train(env)
+            times['t-first'] = time.time() - tstart
+
         if 'd-first' in checked:
+            tstart = time.time()
             env = FireControlEnv(enemies, weapons, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, alpha_d=1)
             actions['d-first'] = train(env)
+            times['d-first'] = time.time() - tstart
+
         if 'mix' in checked:
+            tstart = time.time()
             env = FireControlEnv(enemies, weapons, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, alpha_d=1, alpha_t=1)
             actions['mix'] = train(env)
+            times['mix'] = time.time() - tstart
+
         if 't-cost' in checked:
+            tstart = time.time()
             env = FireControlEnv(enemies, weapons, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, alpha_c=1, alpha_t=1)
             actions['t-cost'] = train(env)
+            times['t-cost'] = time.time() - tstart
+
         if 'd-cost' in checked:
+            tstart = time.time()
             env = FireControlEnv(enemies, weapons, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, alpha_c=1, alpha_d=1)
             actions['d-cost'] = train(env)
+            times['d-cost'] = time.time() - tstart
+
         if 'mix-cost' in checked:
+            tstart = time.time()
             env = FireControlEnv(enemies, weapons, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix,alpha_t=1, alpha_c=1, alpha_d=1)
             actions['mix-cost'] = train(env)
-        return actions
-    # env = FireControlEnv(enemies, weapons, t_matrix, d_matrix, v_matrix, u_matrix)
-    # model = A2C("MlpPolicy", env, verbose=False)
-    # model.learn(total_timesteps=2000)
-    # record = []
-    # observation = env.reset()
-    # for _ in range(5000):
-    #     action, _ = model.predict(observation)
-    #     observation, reward, done, info = env.step(action)
-    #     record.append((info["action_matrix"], reward))
-    #     observation = env.reset()
-    # return max(record, key=lambda x:x[1])[0]
+            times['mix-cost'] = time.time() - tstart
+
+        return actions, times, 'n_to_m'
 
 
 if __name__ == '__main__':

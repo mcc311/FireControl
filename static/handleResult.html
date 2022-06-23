@@ -84,7 +84,7 @@
     var GeoJSON = JSON.parse('{{situation|safe}}')
 
     var Policy = JSON.parse('{{ policy|safe }}')
-    console.log(GeoJSON);
+    console.log(Policy);
     for (let ship of GeoJSON['Enemy']) {
         L.marker([ship.lat, ship.lng],
             {

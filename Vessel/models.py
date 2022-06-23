@@ -8,6 +8,7 @@ class Missile(models.Model):
     type = models.CharField(unique=True, blank=False, max_length=100, null=True)
     default_num = models.IntegerField(null=False, default=2)
     belongs_to = models.CharField(max_length=1, choices=BELONG_STATE, default='b')
+    range = models.FloatField(null=False, default=100)
     damage = models.FloatField(null=False, default=.5)
     cost = models.FloatField(null=False, default=.5)
 

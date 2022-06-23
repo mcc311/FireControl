@@ -213,22 +213,31 @@ def get_policy_index_ver(request):
     # print(u_matrix)
     # print(c_matrix)
     # print(e_types, a_types, w_types)
-    c = get_opt_policy(e_types, a_types, w_types, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, checked)
+    c, times, type = get_opt_policy(e_types, a_types, w_types, t_matrix, d_matrix, v_matrix, u_matrix, c_matrix, checked)
 
-    def action_to_text(action):
+    def action_to_text(action, type, t):
+        print(type)
         text_result = ''
+        if type == '1_to_1':
+            text_result += '一對一(整數指派)\n'
+        if type == '1_to_m':
+            text_result += '一對多(整數指派)\n'
+        if type == 'n_to_m':
+            text_result += '多對多(人工智慧)\n'
         last_a_id = None
         for w_id, to_fight in enumerate(action):
             a_id = w_id // 2
             if np.sum(to_fight) > 0 and last_a_id != a_id:
+                text_result += '------------------\n'
                 text_result += f"\n{a_types[a_id]}:\n"
                 last_a_id = a_id
             for e_id, num in enumerate(to_fight):
                 if num:
                     text_result += f"       | {w_types[w_id]} * {int(num)} > {e_types[e_id]}\n"
+        text_result += f'({t} sec.)\n'
         return text_result
     text_results = {}
     for k, a in c.items():
-        text_results[k] = action_to_text(a)
+        text_results[k] = action_to_text(a, type, times[k])
 
     return Response({'success': 200, 'result': c.values(), 'text_result': text_results})

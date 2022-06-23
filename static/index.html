@@ -23,180 +23,281 @@
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
-        {% include 'nav.html' %}
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                {% include 'top_nav.html' %}
-                <div class="container-fluid">
-                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">首頁</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+<div id="wrapper">
+    {% include 'nav.html' %}
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            {% include 'top_nav.html' %}
+            <div class="container-fluid">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                    <h3 class="text-dark mb-0">首頁</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block"
+                                                         role="button" href="#"><i
+                        class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-start-primary py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>敵方威脅度</span>
+                                        </div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span>40.2</span></div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-skull-crossbones fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>敵方威脅度</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>40.2</span></div>
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-start-success py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>我方火力值</span>
                                         </div>
-                                        <div class="col-auto"><i class="fas fa-skull-crossbones fa-2x text-gray-300"></i></div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span>36.1</span></div>
                                     </div>
+                                    <div class="col-auto"><i class="fas fa-fire-alt fa-2x text-gray-300"></i></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-success py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>我方火力值</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>36.1</span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-fire-alt fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-info py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>船艦數（敵方/我方）</span></div>
-                                            <div class="row g-0 align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>3/2</span></div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm">
-                                                        <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
-                                                    </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-start-info py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-info fw-bold text-xs mb-1">
+                                            <span>船艦數（敵方/我方）</span></div>
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-auto">
+                                                <div class="text-dark fw-bold h5 mb-0 me-3"><span>3/2</span></div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm">
+                                                    <div class="progress-bar bg-info" aria-valuenow="50"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span
+                                                            class="visually-hidden">50%</span></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-auto"><i class="fas fa-ship fa-2x text-gray-300"></i></div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-ship fa-2x text-gray-300"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-4">
+                        <div class="card shadow border-start-warning py-2">
+                            <div class="card-body">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col me-2">
+                                        <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>彈藥庫存</span>
+                                        </div>
+                                        <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-boxes fa-2x text-gray-300"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Start: Chart -->
+                <div class="row">
+                    <div class="col-lg-7 col-xl-8">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="text-primary fw-bold m-0">戰局佈置</h6>
+                                <div class="dropdown no-arrow">
+                                    <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false"
+                                            data-bs-toggle="dropdown" type="button"><i
+                                            class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+                                        <p class="text-center dropdown-header">dropdown header:</p><a
+                                            class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item"
+                                                                                              href="#">&nbsp;Another
+                                        action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">&nbsp;Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-primary" type="button" onclick="AddingEnemyMarker()">
+                                        <i class="fas fa-user-plus"></i>&nbsp; 敵方
+                                    </button>
+                                    <button class="btn btn-primary" type="button" onclick="AddingAllyMarker()">
+                                        <i class="fas fa-user-plus"></i>&nbsp;我方
+                                    </button>
+                                </div><!-- Start: Map Clean -->
+                                <section class="map-clean">
+                                    <div id="map"></div>
+                                    <script>
+                                        const enemyIcon = L.icon({
+                                            iconUrl: "{% static 'assets/img/map marker/blue pin.png' %}",
+                                            iconSize: [30, 48],
+                                        });
+                                        const allyIcon = L.icon({
+                                            iconUrl: "{% static 'assets/img/map marker/red pin.png' %}",
+                                            iconSize: [30, 48],
+                                        })
+                                    </script>
+                                    <script src="{% static 'map.js' %}"></script>
+                                </section><!-- End: Map Clean -->
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-xl-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="text-primary fw-bold m-0">策略設定</h6>
+
+                                <div class="dropdown no-arrow">
+                                    <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false"
+                                            data-bs-toggle="dropdown" type="button"><i
+                                            class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+                                        <p class="text-center dropdown-header">dropdown header:</p><a
+                                            class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item"
+                                                                                              href="#">&nbsp;Another
+                                        action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">&nbsp;Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <form id="battlefield">
+                                            <b>目標函數</b>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                                           id="t-first"><label class="form-check-label"
+                                                                                               for="t-first">威脅度優先策略</label>
+                                            </div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                                           id="d-first"><label class="form-check-label"
+                                                                                               for="d-first">最大毀傷策略</label>
+                                            </div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                                           id="mix"><label class="form-check-label"
+                                                                                           for="mix">綜合策略</label>
+                                            </div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                                           id="t-cost"><label class="form-check-label"
+                                                                                              for="t-cost">最划算威脅度優先策略</label>
+                                            </div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                                           id="d-cost"><label class="form-check-label"
+                                                                                              for="d-cost">最划算毀傷度優先策略</label>
+                                            </div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                                           id="mix-cost"><label class="form-check-label"
+                                                                                                for="mix-cost">最划算綜合策略</label>
+                                            </div>
+                                            <b>限制式</b>
+                                            <div class="form-check"><select>
+                                                <option id="1_to_1">一對一(整數指派)</option>
+                                                <option id="1_to_m">一對多(整數指派)</option>
+                                                <option id="n_to_m">多對多(人工智慧)</option>
+                                            </select></div>
+                                            <button class="btn btn-primary" type="button" style="text-align: right;"
+                                                    onclick="getPolicy()">開始決策
+                                            </button>
+                                            <script>
+                                                function getPolicy() {
+                                                    let checked_list = [];
+                                                    $("#battlefield :checked").each(function () {
+                                                        checked_list.push(this.id);
+                                                    })
+                                                    $.post("/get_policy/", JSON.stringify({
+                                                        "field": JSON.stringify(window.sessionStorage),
+                                                        "checked": JSON.stringify(checked_list)
+                                                    }))
+                                                        .done(function (data) {
+                                                            let text_results = data.text_result;
+                                                            console.log(data);
+                                                            let flag = "true";
+                                                            let active ="active";
+                                                            $("#pills-tab").empty();
+                                                            $("#pills-tabContent").empty();
+
+                                                            for (const [o_id, text] of Object.entries(text_results)){
+                                                                console.log(o_id);
+                                                                var t = text;
+                                                                console.log(text);
+                                                                let label = $(`#${o_id} ~ label`).text();
+                                                                let $li = $("<li>", {class:"nav-item", role:"presentation"});
+                                                                $li.append($(`<button class="nav-link"
+                                                                                    id="pills-${label}-tab"
+                                                                                    data-bs-toggle="pill"
+                                                                                    data-bs-target="#pills-${label}"
+                                                                                    type="button" role="tab"
+                                                                                    aria-controls="pills-${label}"
+                                                                                    aria-selected=${flag}>${label}</button>"`))
+                                                                $("#pills-tab").append($li);
+                                                                $("#pills-tabContent").append($(`<div class="tab-pane fade show ${active}"
+                                                                                                id="pills-${label}" role="tabpanel"
+                                                                                                aria-labelledby="pills-${label}-tab">${text.replaceAll("\n", '<br>')}
+                                                                                                </div>`));
+                                                                flag = "false";
+                                                                active = "";
+
+
+                                                            }
+                                                        });
+                                                }
+                                            </script>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-warning py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>彈藥庫存</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-boxes fa-2x text-gray-300"></i></div>
+                        <div class="card shadow mb-4"></div>
+                        <div class="card"></div>
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="text-primary fw-bold m-0">決策結果</h6>
+                                <div class="dropdown no-arrow">
+                                    <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false"
+                                            data-bs-toggle="dropdown" type="button"><i
+                                            class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+                                        <p class="text-center dropdown-header">dropdown header:</p><a
+                                            class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item"
+                                                                                              href="#">&nbsp;Another
+                                        action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">&nbsp;Something else here</a>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="card-header">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content" id="pills-tabContent">
                                 </div>
                             </div>
                         </div>
-                    </div><!-- Start: Chart -->
-                    <div class="row">
-                        <div class="col-lg-7 col-xl-8">
-                            <div class="card shadow mb-4">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">戰局佈置</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                            <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="btn-group" role="group">
-                                        <button class="btn btn-primary" type="button" onclick="AddingEnemyMarker()">
-                                            <i class="fas fa-user-plus"></i>&nbsp; 敵方
-                                        </button>
-                                        <button class="btn btn-primary" type="button" onclick="AddingAllyMarker()">
-                                            <i class="fas fa-user-plus"></i>&nbsp;我方
-                                        </button>
-                                    </div><!-- Start: Map Clean -->
-                                    <section class="map-clean">
-                                        <div id="map"></div>
-                                        <form id="battlefield"><input value="213"></form>
-                                        <script>
-                                            const enemyIcon = L.icon({
-                                                iconUrl : "{% static 'assets/img/map marker/blue pin.png' %}",
-                                                iconSize: [30, 48],
-                                            });
-                                            const allyIcon = L.icon({
-                                                iconUrl: "{% static 'assets/img/map marker/red pin.png' %}",
-                                                iconSize: [30, 48],
-                                            })
-                                        </script>
-                                        <script src="{% static 'map.js' %}"></script>
-                                    </section><!-- End: Map Clean -->
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-xl-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">選擇策略</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                            <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <p></p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <form>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4">威脅度優先策略</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label class="form-check-label" for="formCheck-9">最大毀傷策略</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-10"><label class="form-check-label" for="formCheck-10">綜合策略</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label class="form-check-label" for="formCheck-7">單位成本威脅度優先策略</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label class="form-check-label" for="formCheck-6">單位成本毀傷度優先策略</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-11"><label class="form-check-label" for="formCheck-11">單位成本綜合策略</label></div>
-                                                <button class="btn btn-primary" type="button" style="text-align: right;" onclick="">開始決策</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card shadow mb-4"></div>
-                            <div class="card"></div>
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">決策結果</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                            <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-header">
-                                    <ul class="nav nav-tabs card-header-tabs">
-                                        <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
-                                    </ul>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End: Chart -->
-                </div>
+                    </div>
+                </div><!-- End: Chart -->
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © NYCU 2022</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © NYCU 2022</span></div>
+            </div>
+        </footer>
     </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
 
 </body>
 
