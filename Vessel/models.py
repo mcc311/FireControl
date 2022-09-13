@@ -23,6 +23,7 @@ class Vessel(models.Model):
     typename = models.CharField(blank=False, max_length=100, null=True)
     type_id = models.CharField(blank=False, max_length=100, null=True)
     value = models.FloatField(null=False, default=.5)
+    weight = models.IntegerField(null=False, default=500)
     belongs_to = models.CharField(max_length=1, choices=BELONG_STATE, default='b')
     fire1 = models.ForeignKey(Missile, default=1, on_delete=models.SET_DEFAULT, related_name='fire1')
     fire2 = models.ForeignKey(Missile, default=1, on_delete=models.SET_DEFAULT, related_name='fire2')

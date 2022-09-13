@@ -48,6 +48,7 @@
                                             <th>艦種</th>
                                             <th>隸屬</th>
                                             <th>價值</th>
+                                            <th>噸位</th>
                                             <th>預設火力1（我軍）<br>/<br>最大火力（敵軍）</th>
                                             <th>預設火力2</th>
                                         </tr>
@@ -59,6 +60,7 @@
                                             <td>{{ vessel.typename }}</td>
                                             <td>{% if vessel.belongs_to == 'a'%}我軍{% else %}敵軍{% endif %}</td>
                                             <td>{{ vessel.value }}</td>
+                                            <td>{{ vessel.weight }}</td>
                                             <td>{{ vessel.fire1 }}</td>
                                             <td>{% if vessel.belongs_to == 'a' %}{{ vessel.fire2 }}{% endif %}</td>
 

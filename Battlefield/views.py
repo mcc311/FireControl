@@ -42,6 +42,8 @@ response = openapi.Response('response description', "Hellp")
                                                                  description='威脅值'),
                                         'value': openapi.Schema(type=openapi.TYPE_NUMBER, title='Value', max=1, min=0,
                                                                 description='價值'),
+                                        'weight': openapi.Schema(type=openapi.TYPE_INTEGER, title='Value', min=0,
+                                        description='噸位'),
                                     })),
             'Ally': openapi.Schema(type=openapi.TYPE_ARRAY, title='我方資訊',
                                    items=openapi.Schema(type=openapi.TYPE_OBJECT, properties={

@@ -12,7 +12,7 @@ class VesselListView(generic.ListView):
 
 class VesselUpdateView(generic.edit.UpdateView):
     model = Vessel
-    fields = ['type_id', 'typename', 'belongs_to', 'value', 'fire1', 'fire2']
+    fields = ['type_id', 'typename', 'belongs_to', 'value', 'fire1', 'fire2', 'weight']
     template_name = 'vessel_update_form.html'
 
 class MissileListView(generic.ListView):
